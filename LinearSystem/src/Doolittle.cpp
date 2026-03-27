@@ -6,52 +6,11 @@ using namespace std;
 Doolittle::Doolittle(int sz):LUDecomposition(sz)
 {}
 
-// void Doolittle:: decompose(ofstream &fout)
-// {
-//     int n=rows;
-//     vector<vector<double>>L(n,vector<double>(n,0));
-//     vector<vector<double>>U(n,vector<double>(n,0));
-//     for(int i=0;i<n;i++)
-//         L[i][i]=1;
-//     for(int j=0;j<n;j++)
-//     {
-//         for(int i=0;i<=j;i++)
-//         {
-//             double sum=0;
-//             for(int k=0;k<i;k++)
-//                 sum+=L[i][k]*U[k][j];
-//             U[i][j]=a[i][j]-sum;
-//         }
-//         for(int i=j+1;i<n;i++)
-//         {
-//             double sum=0;
-//             for(int k=0;k<j;k++)
-//                 sum+=L[i][k]*U[k][j];
-//             L[i][j]=(a[i][j]-sum)/U[j][j];
-//         }
-//     }
-//     fout<<"\n Doolittle L matrix is:"<<endl;
-//     for(auto &row:L)
-//     {
-//         for(auto & val:row)
-//             fout<<val<<" ";
-//         fout<<endl;
-//     }
-//     fout<<"\n Doolittle U matrix is:"<<endl;
-//     for(auto &row:U)
-//     {
-//         for(auto & val:row)
-//             fout<<val<<" ";
-//         fout<<endl;
-//     }
-// }
-
-
 vector<double> Doolittle::solve()
 {
     int n=rows;
-    vector<vector<double>>L(n,vector<double>(n,0));
-    vector<vector<double>>U(n,vector<double>(n,0));
+    vector<vector<double>> L(n,vector<double>(n,0));
+    vector<vector<double>> U(n,vector<double>(n,0));
 
     for(int i=0;i<n;i++)
         L[i][i]=1;
@@ -63,6 +22,7 @@ vector<double> Doolittle::solve()
             double sum=0;
             for(int k=0;k<i;k++)
                 sum+=L[i][k]*U[k][j];
+
             U[i][j]=a[i][j]-sum;
         }
 
@@ -71,12 +31,17 @@ vector<double> Doolittle::solve()
             double sum=0;
             for(int k=0;k<j;k++)
                 sum+=L[i][k]*U[k][j];
+
+            if(U[j][j]==0)
+                throw "Zero pivot in Doolittle";
+
             L[i][j]=(a[i][j]-sum)/U[j][j];
         }
     }
 
-    // Forward substitution
     vector<double> y(n), x(n);
+
+    // Forward substitution (Ly = b)
     for(int i=0;i<n;i++)
     {
         y[i]=a[i][n];
@@ -84,12 +49,16 @@ vector<double> Doolittle::solve()
             y[i]-=L[i][j]*y[j];
     }
 
-    // Back substitution
+    // Back substitution (Ux = y)
     for(int i=n-1;i>=0;i--)
     {
         x[i]=y[i];
         for(int j=i+1;j<n;j++)
             x[i]-=U[i][j]*x[j];
+
+        if(U[i][i]==0)
+            throw "Division by zero in Doolittle";
+
         x[i]/=U[i][i];
     }
 

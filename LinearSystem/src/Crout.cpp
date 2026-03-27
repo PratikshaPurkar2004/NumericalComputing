@@ -49,8 +49,8 @@ Crout ::Crout(int sz):LUDecomposition(sz)
 vector<double> Crout::solve()
 {
     int n=rows;
-    vector<vector<double>>L(n,vector<double>(n,0));
-    vector<vector<double>>U(n,vector<double>(n,0));
+    vector<vector<double>> L(n,vector<double>(n,0));
+    vector<vector<double>> U(n,vector<double>(n,0));
 
     for(int i=0;i<n;i++)
         U[i][i]=1;
@@ -62,6 +62,7 @@ vector<double> Crout::solve()
             double sum=0;
             for(int k=0;k<j;k++)
                 sum+=L[i][k]*U[k][j];
+
             L[i][j]=a[i][j]-sum;
         }
 
@@ -70,26 +71,40 @@ vector<double> Crout::solve()
             double sum=0;
             for(int k=0;k<j;k++)
                 sum+=L[j][k]*U[k][i];
+
+            if(L[j][j]==0)
+                throw "Zero pivot in Crout";
+
             U[j][i]=(a[j][i]-sum)/L[j][j];
         }
     }
 
     vector<double> y(n), x(n);
 
-    // Ly=b
+    // Ly = b
     for(int i=0;i<n;i++)
     {
         y[i]=a[i][n];
         for(int j=0;j<i;j++)
             y[i]-=L[i][j]*y[j];
+
+        if(L[i][i]==0)
+            throw "Division by zero in Crout";
+
+        y[i]/=L[i][i];
     }
 
-    // Ux=y
+    // Ux = y
     for(int i=n-1;i>=0;i--)
     {
         x[i]=y[i];
         for(int j=i+1;j<n;j++)
             x[i]-=U[i][j]*x[j];
+
+        if(U[i][i]==0)
+            throw "Division by zero in Crout";
+
+        x[i]/=U[i][i];
     }
 
     return x;

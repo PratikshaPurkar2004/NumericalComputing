@@ -178,13 +178,13 @@ bool Matrix::isDiagonallyDominant()const
 {
     for(int i=0;i<rows;i++)
     {
-        double sum=0;
-        for(int j=0;j<cols;j++)
+        double sum=0.0;
+        for(int j=0;j<rows;j++)
         {
             if(i!=j)
                 sum+=abs(a[i][j]);
         }
-        if(abs(a[i][i])<sum)
+        if(abs(a[i][i])<=sum)
             return false;
     }
     return true;

@@ -2,17 +2,18 @@
 #include<fstream>
 #include<vector>
 
-#include "Matrix.h"
 #include "GaussianElimination.h"
 #include "Crout.h"
 #include "Doolittle.h"
 #include "Cholesky.h"
+#include "Jacobi.h"
+#include "Seidel.h"
 
 using namespace std;
 
 int main()
 {
-    ifstream leftFile("49/49l.txt");
+    ifstream leftFile("49/49l.txt");   
     ifstream rightFile("49/49r.txt");
     ofstream fout("output.txt");
 
@@ -22,83 +23,75 @@ int main()
         return 1;
     }
 
+    int choice;
+    cout<<"\n1. Gaussian\n2. Doolittle\n3. Crout\n4. Cholesky\n5. Jacobi\n6. Seidel\n";
+    cout<<"Enter choice: ";
+    cin>>choice;
+
     int r,c;
     leftFile >> r >> c;
 
-    // 🔥 Only ONE pointer
     GaussianElimination* solver;
 
-    // -------- Gaussian --------
-    solver = new partialPivot(r);
+    if(choice == 1)
+        solver = new partialPivot(r);
+    else if(choice == 2)
+        solver = (GaussianElimination*) new Doolittle(r);
+    else if(choice == 3)
+        solver = (GaussianElimination*) new Crout(r);
+    else if(choice == 4)
+        solver = (GaussianElimination*) new Cholesky(r);
+    else if(choice == 5)
+    {
+        Jacobi jb(r);
 
-    for(int i=0;i<r;i++)
-        for(int j=0;j<c;j++)
-            leftFile >> (*solver)(i,j);
+        for(int i=0;i<r;i++)
+            for(int j=0;j<c;j++)
+                leftFile >> jb(i,j);
 
-    for(int i=0;i<r;i++)
-        rightFile >> (*solver)(i,c);
+        for(int i=0;i<r;i++)
+            rightFile >> jb(i,c);
 
-    auto x = solver->solve();
+        try
+        {
+            vector<double> x = jb.solve(1000,0.000001);
 
-    fout<<"\nGaussian:\n";
-    for(int i=0;i<r;i++)
-        fout<<"x"<<i+1<<" = "<<x[i]<<endl;
+            fout<<"Jacobi Solution \n";
+            for(int i=0;i<r;i++)
+                fout<<"x"<<i+1<<" = "<<x[i]<<endl;
+        }
+        catch(const char* msg)
+        {
+            cout<<"Error: "<<msg<<endl;
+            fout<<"Error: "<<msg<<endl;
+        }
+        return 0;
+    }
 
-    delete solver;
+    else if(choice == 6)
+    {
+        Seidel sd(r);
 
-    // -------- Doolittle --------
-    solver = (GaussianElimination*) new Doolittle(r);
-    leftFile.clear(); 
-    leftFile.seekg(0);
-    rightFile.clear(); 
-    rightFile.seekg(0);
+        for(int i=0;i<r;i++)
+            for(int j=0;j<c;j++)
+                leftFile >> sd(i,j);
 
-    leftFile >> r >> c;
+        for(int i=0;i<r;i++)
+            rightFile >> sd(i,c);
 
-    for(int i=0;i<r;i++)
-        for(int j=0;j<c;j++)
-            leftFile >> (*solver)(i,j);
+        vector<double> x = sd.solve(1000,0.000001);
 
-    for(int i=0;i<r;i++)
-        rightFile >> (*solver)(i,c);
+        fout<<"Seidel Solution\n";
+        for(int i=0;i<r;i++)
+            fout<<"x"<<i+1<<" = "<<x[i]<<endl;
 
-    x = solver->solve();
-
-    fout<<"\nDoolittle:\n";
-    for(int i=0;i<r;i++)
-        fout<<"x"<<i+1<<" = "<<x[i]<<endl;
-    fout << "\nDoolittle executed successfully\n";
-    delete solver;
-
-     solver = (GaussianElimination*) new Crout(r);
-
-    leftFile.clear(); leftFile.seekg(0);
-    rightFile.clear(); rightFile.seekg(0);
-
-    leftFile >> r >> c;
-
-    for(int i=0;i<r;i++)
-        for(int j=0;j<c;j++)
-            leftFile >> (*solver)(i,j);
-
-    for(int i=0;i<r;i++)
-        rightFile >> (*solver)(i,c);
-
-    x = solver->solve();
-
-    fout << "\nCrout Solution:\n";
-    for(int i=0;i<r;i++)
-        fout << "x" << i+1 << " = " << x[i] << endl;
-
-    delete solver;
-
-    // -------- CHOLESKY --------
-    solver = (GaussianElimination*) new Cholesky(r);
-
-    leftFile.clear(); leftFile.seekg(0);
-    rightFile.clear(); rightFile.seekg(0);
-
-    leftFile >> r >> c;
+        return 0;
+    }
+    else
+    {
+        cout<<"Invalid choice\n";
+        return 0;
+    }
 
     for(int i=0;i<r;i++)
         for(int j=0;j<c;j++)
@@ -109,24 +102,25 @@ int main()
 
     try
     {
-        x = solver->solve();
+        vector<double> x = solver->solve();
 
-        fout << "\nCholesky Solution:\n";
+        fout<<"Solution\n";
         for(int i=0;i<r;i++)
-            fout << "x" << i+1 << " = " << x[i] << endl;
+            fout<<"x"<<i+1<<" = "<<x[i]<<endl;
     }
     catch(const char* msg)
     {
-        fout << msg << endl;
+        fout<<"Error: "<<msg<<endl;
     }
 
     delete solver;
-
     fout.close();
-    return 0;
 
-    
+    return 0;
 }
+
+
+
 
 // int main()
 // {
