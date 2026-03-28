@@ -13,8 +13,8 @@ using namespace std;
 
 int main()
 {
-    ifstream leftFile("49/49l.txt");   
-    ifstream rightFile("49/49r.txt");
+    ifstream leftFile("49/l2.txt");   
+    ifstream rightFile("49/r2.txt");
     ofstream fout("output.txt");
 
     if(!leftFile || !rightFile || !fout)
