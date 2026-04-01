@@ -16,6 +16,7 @@ class Matrix{
         Matrix(int rows,int cols);
         Matrix(const Matrix &m);
         void readFromFile(ifstream &fin);
+        void resize(int rows,int cols);
         void displayToFile(ofstream &fout) const;
         Matrix operator+(const Matrix &m)const;
         Matrix operator-(const Matrix &m)const;

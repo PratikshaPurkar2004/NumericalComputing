@@ -9,6 +9,7 @@ class GaussianElimination:public LinearSystem
 {
     public:
         GaussianElimination(int sz);
+        virtual ~GaussianElimination() {}
         virtual void pivot(int k)=0;
         virtual vector<double> solve() = 0;
         void forwardElimination();

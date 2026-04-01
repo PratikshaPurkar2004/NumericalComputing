@@ -8,13 +8,14 @@
 #include "Cholesky.h"
 #include "Jacobi.h"
 #include "Seidel.h"
+#include "Gerschgorin.h"
 
 using namespace std;
 
 int main()
 {
-    ifstream leftFile("49/l2.txt");   
-    ifstream rightFile("49/r2.txt");
+    ifstream leftFile("49/49l.txt");   
+    ifstream rightFile("49/49r.txt");
     ofstream fout("output.txt");
 
     if(!leftFile || !rightFile || !fout)
@@ -31,16 +32,27 @@ int main()
     int r,c;
     leftFile >> r >> c;
 
-    GaussianElimination* solver;
+    Gerschgorin g(r);
+    g.readFromFile(leftFile);
+
+    fout << "\nGerschgorin Discs\n";
+    g.findDiscs(fout);
+    fout << "Choice = " << choice << "\n";
+
+    leftFile.clear();
+    leftFile.seekg(0);
+    leftFile >> r >> c;
+
+    LinearSystem* solver;
 
     if(choice == 1)
         solver = new partialPivot(r);
     else if(choice == 2)
-        solver = (GaussianElimination*) new Doolittle(r);
+        solver = new Doolittle(r);
     else if(choice == 3)
-        solver = (GaussianElimination*) new Crout(r);
+        solver = new Crout(r);
     else if(choice == 4)
-        solver = (GaussianElimination*) new Cholesky(r);
+        solver = new Cholesky(r);
     else if(choice == 5)
     {
         Jacobi jb(r);
@@ -93,6 +105,8 @@ int main()
         return 0;
     }
 
+    solver->resize(r, c + 1);
+
     for(int i=0;i<r;i++)
         for(int j=0;j<c;j++)
             leftFile >> (*solver)(i,j);
@@ -114,7 +128,7 @@ int main()
     }
 
     delete solver;
-    fout.close();
+     
 
     return 0;
 }

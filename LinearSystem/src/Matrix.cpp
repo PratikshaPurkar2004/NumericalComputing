@@ -23,6 +23,13 @@ Matrix::Matrix(const Matrix &m)
     a=m.a;
 }
 
+void Matrix::resize(int r,int c)
+{
+    rows = r;
+    cols = c;
+    a.assign(rows, vector<double>(cols, 0));
+}
+
 // Matrix::~Matrix()
 // {}
 
