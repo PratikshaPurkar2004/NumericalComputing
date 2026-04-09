@@ -44,10 +44,15 @@
 vector<double> Jacobi::solve(int maxIter, double tol)
 {
     int n = rows;
+    // if(!isDiagonallyDominant())
+    // {
+    //     cout<<"Matrix not diagonally dominant ";
+    //     makeDiagonallyDominant();
+    // }
 
     vector<double> x(n, 0), x_new(n, 0);
 
-    double w = 0.5;   // RELAXATION FACTOR 
+    double w = 0.5;    
 
     for(int iter = 0; iter < maxIter; iter++)
     {
@@ -70,11 +75,9 @@ vector<double> Jacobi::solve(int maxIter, double tol)
 
             double xi = sum / (*this)(i,i);
 
-            // RELAXATION (prevents explosion)
             x_new[i] = (1 - w) * x[i] + w * xi;
         }
 
-        // error calculation
         double err = 0;
         for(int i = 0; i < n; i++)
             err += fabs(x_new[i] - x[i]);

@@ -9,6 +9,7 @@
 #include "Jacobi.h"
 #include "Seidel.h"
 #include "Gerschgorin.h"
+#include "Lagrange.h"   
 
 using namespace std;
 
@@ -25,19 +26,21 @@ int main()
     }
 
     int choice;
-    cout<<"\n1. Gaussian\n2. Doolittle\n3. Crout\n4. Cholesky\n5. Jacobi\n6. Seidel\n";
+    cout<<"\n1. Gaussian\n2. Doolittle\n3. Crout\n4. Cholesky\n5. Jacobi\n6. Seidel\n7. Lagrange\n";
     cout<<"Enter choice: ";
     cin>>choice;
 
     int r,c;
     leftFile >> r >> c;
 
+    
     Gerschgorin g(r);
     g.readFromFile(leftFile);
 
     fout << "\nGerschgorin Discs\n";
     g.findDiscs(fout);
     fout << "Choice = " << choice << "\n";
+
 
     leftFile.clear();
     leftFile.seekg(0);
@@ -53,6 +56,7 @@ int main()
         solver = new Crout(r);
     else if(choice == 4)
         solver = new Cholesky(r);
+
     else if(choice == 5)
     {
         Jacobi jb(r);
@@ -68,7 +72,7 @@ int main()
         {
             vector<double> x = jb.solve(1000,0.000001);
 
-            fout<<"Jacobi Solution \n";
+            fout<<"Jacobi Solution\n";
             for(int i=0;i<r;i++)
                 fout<<"x"<<i+1<<" = "<<x[i]<<endl;
         }
@@ -99,6 +103,35 @@ int main()
 
         return 0;
     }
+
+    else if(choice == 7)
+    {
+        ifstream fin("points.txt");
+
+        if(!fin)
+        {
+            cout<<"Points file error\n";
+            return 0;
+        }
+
+        int n;
+        fin >> n;
+
+        Lagrange lg(n);
+        lg.readPoints(fin);
+
+        double xp;
+        cout<<"Enter value to interpolate: ";
+        cin>>xp;
+
+        double result = lg.solve(xp);
+
+        fout<<"Lagrange Interpolation\n";
+        fout<<"Value at x = "<<xp<<" is "<<result<<endl;
+
+        return 0;
+    }
+
     else
     {
         cout<<"Invalid choice\n";
@@ -128,7 +161,6 @@ int main()
     }
 
     delete solver;
-     
 
     return 0;
 }

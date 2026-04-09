@@ -10,7 +10,6 @@ class Jacobi : public Iteration
 {
 public:
     Jacobi(int n) : Iteration(n) {}
-
     vector<double> solve(int maxIter = 100, double tol = 1e-6);
 };
 

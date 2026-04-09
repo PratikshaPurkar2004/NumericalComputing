@@ -8,12 +8,9 @@ vector<double> Seidel::solve(int maxIter, double tol)
 
     // if(!isDiagonallyDominant())
     // {
-    //     cout<<"Matrix not diagonally dominant → converting...\n";
+    //     cout<<"Matrix not diagonally dominant ";
     //     makeDiagonallyDominant();
     // }
-
-    // if(!isDiagonallyDominant())
-    //     throw "Cannot make matrix diagonally dominant";
 
     vector<double> x(n,0);
 

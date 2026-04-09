@@ -1,6 +1,6 @@
 #include "Gerschgorin.h"
 #include<cmath>
-// Constructor
+
 Gerschgorin::Gerschgorin(int n) : Eigen(n) {}
 
 void Gerschgorin::findDiscs(ofstream &fout, double tol)
@@ -19,5 +19,7 @@ void Gerschgorin::findDiscs(ofstream &fout, double tol)
         fout << "Disc " << i+1
              << ": |z - " << center
              << "| <= " << radius << endl;
+        fout << "Approx Eigenvalue ≈ " << center << endl << endl;
     }
 }
+

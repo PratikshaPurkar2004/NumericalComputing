@@ -1,102 +1,152 @@
 
 Gerschgorin Discs
 Disc 1: |z - -380.049| <= 227.882
+Approx Eigenvalue ≈ -380.049
+
 Disc 2: |z - -236.024| <= 185.941
+Approx Eigenvalue ≈ -236.024
+
 Disc 3: |z - -216| <= 160
+Approx Eigenvalue ≈ -216
+
 Disc 4: |z - -212.024| <= 153.941
+Approx Eigenvalue ≈ -212.024
+
 Disc 5: |z - -216| <= 160
+Approx Eigenvalue ≈ -216
+
 Disc 6: |z - -236.024| <= 185.941
+Approx Eigenvalue ≈ -236.024
+
 Disc 7: |z - -380.049| <= 227.882
+Approx Eigenvalue ≈ -380.049
+
 Disc 8: |z - -236.024| <= 185.941
+Approx Eigenvalue ≈ -236.024
+
 Disc 9: |z - -92| <= 144
+Approx Eigenvalue ≈ -92
+
 Disc 10: |z - -71.9756| <= 118.059
+Approx Eigenvalue ≈ -71.9756
+
 Disc 11: |z - -68| <= 112
+Approx Eigenvalue ≈ -68
+
 Disc 12: |z - -71.9756| <= 118.059
+Approx Eigenvalue ≈ -71.9756
+
 Disc 13: |z - -92| <= 144
+Approx Eigenvalue ≈ -92
+
 Disc 14: |z - -236.024| <= 185.941
+Approx Eigenvalue ≈ -236.024
+
 Disc 15: |z - -216| <= 160
+Approx Eigenvalue ≈ -216
+
 Disc 16: |z - -71.9756| <= 118.059
+Approx Eigenvalue ≈ -71.9756
+
 Disc 17: |z - -51.9512| <= 92.1177
+Approx Eigenvalue ≈ -51.9512
+
 Disc 18: |z - -47.9756| <= 86.0589
+Approx Eigenvalue ≈ -47.9756
+
 Disc 19: |z - -51.9512| <= 92.1177
+Approx Eigenvalue ≈ -51.9512
+
 Disc 20: |z - -71.9756| <= 118.059
+Approx Eigenvalue ≈ -71.9756
+
 Disc 21: |z - -216| <= 160
+Approx Eigenvalue ≈ -216
+
 Disc 22: |z - -212.024| <= 153.941
+Approx Eigenvalue ≈ -212.024
+
 Disc 23: |z - -68| <= 112
+Approx Eigenvalue ≈ -68
+
 Disc 24: |z - -47.9756| <= 86.0589
+Approx Eigenvalue ≈ -47.9756
+
 Disc 25: |z - -44| <= 80
+Approx Eigenvalue ≈ -44
+
 Disc 26: |z - -47.9756| <= 86.0589
+Approx Eigenvalue ≈ -47.9756
+
 Disc 27: |z - -68| <= 112
+Approx Eigenvalue ≈ -68
+
 Disc 28: |z - -212.024| <= 153.941
+Approx Eigenvalue ≈ -212.024
+
 Disc 29: |z - -216| <= 160
+Approx Eigenvalue ≈ -216
+
 Disc 30: |z - -71.9756| <= 118.059
+Approx Eigenvalue ≈ -71.9756
+
 Disc 31: |z - -51.9512| <= 92.1177
+Approx Eigenvalue ≈ -51.9512
+
 Disc 32: |z - -47.9756| <= 86.0589
+Approx Eigenvalue ≈ -47.9756
+
 Disc 33: |z - -51.9512| <= 92.1177
+Approx Eigenvalue ≈ -51.9512
+
 Disc 34: |z - -71.9756| <= 118.059
+Approx Eigenvalue ≈ -71.9756
+
 Disc 35: |z - -216| <= 160
+Approx Eigenvalue ≈ -216
+
 Disc 36: |z - -236.024| <= 185.941
+Approx Eigenvalue ≈ -236.024
+
 Disc 37: |z - -92| <= 144
+Approx Eigenvalue ≈ -92
+
 Disc 38: |z - -71.9756| <= 118.059
+Approx Eigenvalue ≈ -71.9756
+
 Disc 39: |z - -68| <= 112
+Approx Eigenvalue ≈ -68
+
 Disc 40: |z - -71.9756| <= 118.059
+Approx Eigenvalue ≈ -71.9756
+
 Disc 41: |z - -92| <= 144
+Approx Eigenvalue ≈ -92
+
 Disc 42: |z - -236.024| <= 185.941
+Approx Eigenvalue ≈ -236.024
+
 Disc 43: |z - -380.049| <= 227.882
+Approx Eigenvalue ≈ -380.049
+
 Disc 44: |z - -236.024| <= 185.941
+Approx Eigenvalue ≈ -236.024
+
 Disc 45: |z - -216| <= 160
+Approx Eigenvalue ≈ -216
+
 Disc 46: |z - -212.024| <= 153.941
+Approx Eigenvalue ≈ -212.024
+
 Disc 47: |z - -216| <= 160
+Approx Eigenvalue ≈ -216
+
 Disc 48: |z - -236.024| <= 185.941
+Approx Eigenvalue ≈ -236.024
+
 Disc 49: |z - -380.049| <= 227.882
-Choice = 3
-Solution
-x1 = 1.70711
-x2 = 1.35355
-x3 = 1
-x4 = 0.853553
-x5 = 0.999999
-x6 = 1.35355
-x7 = 1.70711
-x8 = 1.35355
-x9 = 1
-x10 = 0.646447
-x11 = 0.5
-x12 = 0.646446
-x13 = 0.999999
-x14 = 1.35355
-x15 = 1
-x16 = 0.646447
-x17 = 0.292893
-x18 = 0.146446
-x19 = 0.292893
-x20 = 0.646447
-x21 = 1
-x22 = 0.853553
-x23 = 0.5
-x24 = 0.146446
-x25 = -2.95616e-007
-x26 = 0.146446
-x27 = 0.5
-x28 = 0.853553
-x29 = 0.999999
-x30 = 0.646446
-x31 = 0.292893
-x32 = 0.146446
-x33 = 0.292893
-x34 = 0.646446
-x35 = 0.999999
-x36 = 1.35355
-x37 = 0.999999
-x38 = 0.646447
-x39 = 0.5
-x40 = 0.646446
-x41 = 0.999999
-x42 = 1.35355
-x43 = 1.70711
-x44 = 1.35355
-x45 = 1
-x46 = 0.853553
-x47 = 0.999999
-x48 = 1.35355
-x49 = 1.70711
+Approx Eigenvalue ≈ -380.049
+
+Choice = 7
+Lagrange Interpolation
+Value at x = 2 is 4
