@@ -11,7 +11,7 @@ class Interpolation : public Matrix
 {
     public:
         Interpolation(int n1 = 0);
-        //void setPoint(int i, double xi, double yi); 
+        void readPoints(ifstream &fin); 
         virtual double solve(double xp) = 0;
 };
 

@@ -9,7 +9,8 @@
 #include "Jacobi.h"
 #include "Seidel.h"
 #include "Gerschgorin.h"
-#include "Lagrange.h"   
+#include "Lagrange.h"
+#include "LeastSquare.h"   
 
 using namespace std;
 
@@ -26,7 +27,7 @@ int main()
     }
 
     int choice;
-    cout<<"\n1. Gaussian\n2. Doolittle\n3. Crout\n4. Cholesky\n5. Jacobi\n6. Seidel\n7. Lagrange\n";
+    cout<<"\n1. Gaussian\n2. Doolittle\n3. Crout\n4. Cholesky\n5. Jacobi\n6. Seidel\n7. Lagrange\n8. Least Square\n";
     cout<<"Enter choice: ";
     cin>>choice;
 
@@ -132,6 +133,26 @@ int main()
         return 0;
     }
 
+    else if(choice == 8)
+    {
+        ifstream fin("points.txt");
+
+        if(!fin)
+        {
+            cout << "Points file error\n";
+            return 0;
+        }
+
+        int n;
+        fin >> n;
+
+        LeastSquare ls(n);
+        ls.readPoints(fin);  
+
+        ls.fit(fout);
+
+        return 0;
+    }
     else
     {
         cout<<"Invalid choice\n";
