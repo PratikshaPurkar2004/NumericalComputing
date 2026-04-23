@@ -134,25 +134,37 @@ int main()
     }
 
     else if(choice == 8)
+{
+    ifstream fin("points.txt");
+
+    if(!fin)
     {
-        ifstream fin("points.txt");
-
-        if(!fin)
-        {
-            cout << "Points file error\n";
-            return 0;
-        }
-
-        int n;
-        fin >> n;
-
-        LeastSquare ls(n);
-        ls.readPoints(fin);  
-
-        ls.fit(fout);
-
+        cout << "Points file error\n";
         return 0;
     }
+
+    int n;
+    fin >> n;
+
+    LeastSquare ls(n);
+    ls.readPoints(fin);
+
+    int degree;
+    cout << "Enter degree: ";
+    cin >> degree;
+
+    try
+    {
+        ls.fitPolynomial(fout, degree);
+    }
+    catch(const char* msg)
+    {
+        cout << msg << endl;
+        fout << msg << endl;
+    }
+
+    return 0;
+}
     else
     {
         cout<<"Invalid choice\n";

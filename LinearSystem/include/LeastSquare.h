@@ -2,12 +2,14 @@
 #define LEASTSQUARE_H
 
 #include "CurveFitting.h"
+#include <fstream>
 
 class LeastSquare : public CurveFitting
 {
 public:
     LeastSquare(int n);
-    void fit(ofstream &fout);
+
+    void fitPolynomial(std::ofstream &fout, int degree);
 };
 
 #endif
