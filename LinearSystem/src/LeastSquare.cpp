@@ -34,7 +34,7 @@ void LeastSquare::fitPolynomial(ofstream &fout, int degree)
 
     fout << fixed << setprecision(4);
 
-    fout << "\n POLYNOMIAL FIT \n";
+    fout << "POLYNOMIAL FIT \n";
     fout << "Degree = " << degree << endl;
 
     fout << "y = ";
