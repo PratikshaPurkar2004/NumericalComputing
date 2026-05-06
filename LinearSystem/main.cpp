@@ -160,7 +160,6 @@ int main()
     catch(const char* msg)
     {
         cout << msg << endl;
-        fout << msg << endl;
     }
 
     return 0;
