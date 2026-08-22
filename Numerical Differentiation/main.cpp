@@ -7,33 +7,18 @@ using namespace std;
 
 int main()
 {
-    // ------------------------------------------------
-    // Function:
-    // f(x) = x^3 + 2x^2 - x + 1
-    // ------------------------------------------------
-
     auto function = [](double x)
     {
         return x * x * x + 2 * x * x - x + 1;
     };
-
-
-    // ------------------------------------------------
-    // Exact derivative:
-    // f'(x) = 3x^2 + 4x - 1
-    // ------------------------------------------------
 
     auto exactDerivative = [](double x)
     {
         return 3 * x * x + 4 * x - 1;
     };
 
-
-    // Point at which derivative is calculated
     double x = 1.0;
 
-
-    // Different h values
     vector<double> hValues =
     {
         0.1,
@@ -42,16 +27,8 @@ int main()
         0.0001
     };
 
+    NumericalDifferentiation n(function,exactDerivative, x );
 
-    // Create object
-    NumericalDifferentiation numericalDiff(
-        function,
-        exactDerivative,
-        x
-    );
-
-
-    // Display problem information
     cout << "==============================================\n";
     cout << "       NUMERICAL DIFFERENTIATION\n";
     cout << "==============================================\n";
@@ -63,16 +40,10 @@ int main()
     cout << "Exact derivative at x = 1: "
          << exactDerivative(x) << endl;
 
+    n.printResults("Forward Difference",hValues);
 
-    // Forward Difference
-    numericalDiff.printResults("Forward Difference",hValues);
+    n.printResults("Backward Difference",hValues);
 
-
-    // Backward Difference
-    numericalDiff.printResults("Backward Difference",hValues);
-
-
-    // Central Difference
-    numericalDiff.printResults("Central Difference",hValues);
+    n.printResults("Central Difference",hValues);
     return 0;
 }

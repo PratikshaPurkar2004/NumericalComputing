@@ -6,8 +6,6 @@
 
 using namespace std;
 
-
-// Constructor
 NumericalDifferentiation::NumericalDifferentiation(std::function<double(double)> func,std::function<double(double)> derivative,double point)
 {
     function = func;
@@ -18,32 +16,25 @@ NumericalDifferentiation::NumericalDifferentiation(std::function<double(double)>
 
 // Forward Difference
 // f'(x) = [f(x+h) - f(x)] / h
-
 double NumericalDifferentiation::forwardDifference(double h)
 {
     return (function(x + h) - function(x)) / h;
 }
 
-
 // Backward Difference
 // f'(x) = [f(x) - f(x-h)] / h
-
 double NumericalDifferentiation::backwardDifference(double h)
 {
     return (function(x) - function(x - h)) / h;
 }
 
-
 // Central Difference
 // f'(x) = [f(x+h) - f(x-h)] / 2h
-
 double NumericalDifferentiation::centralDifference(double h)
 {
     return (function(x + h) - function(x - h)) / (2 * h);
 }
 
-
-// Absolute Error
 
 double NumericalDifferentiation::absoluteError(double approximate)
 {
@@ -52,7 +43,6 @@ double NumericalDifferentiation::absoluteError(double approximate)
 }
 
 
-// Print Results
 
 void NumericalDifferentiation::printResults(const string& method,const vector<double>& hValues)
 {
