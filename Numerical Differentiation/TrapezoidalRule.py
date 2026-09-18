@@ -1,52 +1,62 @@
-import matplotlib.pyplot as plt
+import math
 
+# Function
 def f(x):
-    return x**2
-
-def exact_integral(a, b):
-    return (b**3 - a**3) / 3
-
-a = float(input("Enter lower limit a: "))
-b = float(input("Enter upper limit b: "))
-
-exact = exact_integral(a, b)
-
-n_values = [2, 4, 6, 8, 10]
-
-error_values = []
+    return x * x
 
 
-print("\nTRAPEZOIDAL RULE")
-print("-" * 70)
-print(f"{'n':<10}{'h':<15}{'IT':<15}{'Exact':<15}{'Error':<15}")
-print("-" * 70)
+# Limits
+a = 0
+b = 2
 
+# Exact value
+exact_value = 8 / 3
+
+# Number of trapezoids
+n_values = [1, 2, 4, 8, 16]
+
+# Print table heading
+print("+----+--------+-----------------------+----------------+--------------------+")
+print("| n  |   h    | Numerical Approximation| Absolute Error | Order of Accuracy  |")
+print("+----+--------+-----------------------+----------------+--------------------+")
+
+previous_error = None
 
 for n in n_values:
+
+    # Step size
     h = (b - a) / n
+
+    # First and last values
     total = f(a) + f(b)
+
+    # Middle values
     for i in range(1, n):
         x = a + i * h
         total = total + 2 * f(x)
-    IT = (h / 2) * total
 
-    error = abs(exact - IT)
+    # Trapezoidal Rule
+    approximation = (h / 2) * total
 
-    error_values.append(error)
+    # Absolute error
+    error = abs(exact_value - approximation)
 
-    print(f"{n:<10}{h:<15.6f}{IT:<15.6f}"
-          f"{exact:<15.6f}{error:<15.6f}")
+    # Order of accuracy
+    if previous_error is None:
+        order = "-"
+    else:
+        order = math.log(previous_error / error, 2)
 
+    # Print each row
+    if order == "-":
+        print(f"| {n:<2} | {h:<6.3f} | {approximation:<21.6f} | {error:<14.6f} | {order:<18} |")
+    else:
+        print(f"| {n:<2} | {h:<6.3f} | {approximation:<21.6f} | {error:<14.6f} | {order:<18.2f} |")
 
-# GRAPH 
+    # Save current error
+    previous_error = error
 
-plt.plot(n_values, error_values, marker='o')
+# Bottom line
+print("+----+--------+-----------------------+----------------+--------------------+")
 
-plt.xlabel("Number of intervals (n)")
-plt.ylabel("Absolute Error")
-
-plt.title("Trapezoidal Rule - Error vs n")
-
-plt.grid(True)
-
-plt.show()
+print("\nExact value =", exact_value)
