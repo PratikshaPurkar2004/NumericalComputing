@@ -11,7 +11,7 @@ b = float(input("Enter upper limit b: "))
 
 exact = exact_integral(a, b)
 
-n_values = [2, 4, 6, 8, 10]
+n_values = [2, 4, 8,16,32, 64, 128]
 
 error_values = []
 
