@@ -1,26 +1,18 @@
 import matplotlib.pyplot as plt
 
-
-# Function
 def f(x):
     return x**2
 
-
-# Exact integral
 def exact_integral(a, b):
     return (b**3 - a**3) / 3
 
-
-# Input
 a = float(input("Enter lower limit a: "))
 b = float(input("Enter upper limit b: "))
 
 exact = exact_integral(a, b)
 
-# n must be even
 n_values = [2, 4, 6, 8, 10]
 
-# Store values for graph
 h_values = []
 IT_values = []
 error_values = []
@@ -51,16 +43,12 @@ for n in n_values:
 
     error = abs(exact - IT)
 
-    # Store values
     h_values.append(h)
     IT_values.append(IT)
     error_values.append(error)
 
     print(f"{n:<10}{h:<15.6f}{IT:<15.6f}"
           f"{exact:<15.6f}{error:<15.6f}")
-
-
-# ---------------- GRAPH ----------------
 
 plt.plot(n_values, error_values, marker='o')
 
