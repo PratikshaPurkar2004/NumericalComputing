@@ -1,62 +1,22 @@
-import matplotlib.pyplot as plt
-
-def f(x):
-    return x**2
-
-def exact_integral(a, b):
-    return (b**3 - a**3) / 3
-
-a = float(input("Enter lower limit a: "))
-b = float(input("Enter upper limit b: "))
-
-exact = exact_integral(a, b)
-
-n_values = [2, 4, 8,16,32,64,128]
-
-h_values = []
-IT_values = []
-error_values = []
+from numericalIntegration import NumericalIntegration
 
 
-print("\nSIMPSON'S 1/3 RULE")
-print("-" * 70)
-print(f"{'n':<10}{'h':<15}{'IT':<15}{'Exact':<15}{'Error':<15}")
-print("-" * 70)
+class SimpsonOneThird(NumericalIntegration):
 
+    def simpsonOneThird(self, n):
 
-for n in n_values:
+        if n % 2 != 0:
+            raise ValueError("Simpson 1/3 requires n to be even.")
 
-    h = (b - a) / n
+        h = self.calculate_h(n)
 
-    total = f(a) + f(b)
+        result = (self.function(self.lower) + self.function(self.upper))
 
-    for i in range(1, n):
+        for i in range(1, n):
+            x = self.lower + i * h
+            if i % 2 == 0:
+                result += 2 * self.function(x)
+            else:
+                result += 4 * self.function(x)
 
-        x = a + i * h
-
-        if i % 2 == 0:
-            total = total + 2 * f(x)
-        else:
-            total = total + 4 * f(x)
-
-    IT = (h / 3) * total
-
-    error = abs(exact - IT)
-
-    h_values.append(h)
-    IT_values.append(IT)
-    error_values.append(error)
-
-    print(f"{n:<10}{h:<15.6f}{IT:<15.6f}"
-          f"{exact:<15.6f}{error:<15.6f}")
-
-plt.plot(n_values, error_values, marker='o')
-
-plt.xlabel("Number of intervals (n)")
-plt.ylabel("Absolute Error")
-
-plt.title("Simpson's 1/3 Rule - Error vs n")
-
-plt.grid(True)
-
-plt.show()
+        return (h / 3) * result

@@ -141,6 +141,7 @@ class Graph:
         # Find minimum and maximum x values
 
         min_x = min(x_values)
+
         max_x = max(x_values)
 
 
@@ -353,5 +354,78 @@ class Graph:
         plt.legend()
 
         plt.grid(True)
+
+        plt.show()
+
+
+    # -----------------------------------------
+    # Numerical Integration Error Graph
+    # -----------------------------------------
+
+    def plot_integration_error(
+        self,
+        n_values,
+        trapezoidal_errors,
+        simpson13_errors,
+        simpson38_errors
+    ):
+
+        # -----------------------------------------
+        # Create graph
+        # -----------------------------------------
+
+        plt.figure()
+
+
+        # Trapezoidal Rule
+
+        plt.plot(
+            n_values,
+            trapezoidal_errors,
+            marker="o",
+            label="Trapezoidal Rule"
+        )
+
+
+        # Simpson 1/3 Rule
+
+        plt.plot(
+            n_values,
+            simpson13_errors,
+            marker="o",
+            label="Simpson 1/3 Rule"
+        )
+
+
+        # Simpson 3/8 Rule
+
+        plt.plot(
+            n_values,
+            simpson38_errors,
+            marker="o",
+            label="Simpson 3/8 Rule"
+        )
+
+
+        # -----------------------------------------
+        # Graph labels
+        # -----------------------------------------
+
+        plt.xlabel(
+            "Number of Intervals (n)"
+        )
+
+        plt.ylabel(
+            "Absolute Error"
+        )
+
+        plt.title(
+            "Numerical Integration Error Comparison"
+        )
+
+
+        plt.grid(True)
+
+        plt.legend()
 
         plt.show()
