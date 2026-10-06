@@ -9,11 +9,7 @@ class NumericalIntegration:
         return (self.upper - self.lower) / n
 
     def exact_integral(self, exact_function):
-        return exact_function(
-            self.upper
-        ) - exact_function(
-            self.lower
-        )
+        return exact_function(self.upper ) - exact_function( self.lower )
 
     def absolute_error(self, numerical_result, exact_result):
         return abs(exact_result - numerical_result)

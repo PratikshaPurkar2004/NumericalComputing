@@ -459,11 +459,6 @@ elif choice == 4:
         x
     )
 
-
-    # ---------------------------------------------
-    # Exact derivative
-    # ---------------------------------------------
-
     exact = exact_derivative(x)
 
 
@@ -497,9 +492,7 @@ elif choice == 4:
 
         result = richardson.calculate(h)
 
-        error = richardson.absolute_error(
-            result
-        )
+        error = richardson.absolute_error( result)
 
 
         print(
@@ -509,11 +502,6 @@ elif choice == 4:
                 error
             )
         )
-
-
-    # ---------------------------------------------
-    # Graph
-    # ---------------------------------------------
 
     graph = Graph(
         forward,
@@ -532,10 +520,6 @@ elif choice == 4:
     )
 
 
-# =================================================
-# Lagrange Interpolation
-# =================================================
-
 elif choice == 5:
 
     print("\n==============================================")
@@ -543,18 +527,7 @@ elif choice == 5:
     print("==============================================")
 
 
-    # ---------------------------------------------
-    # Number of data points
-    # ---------------------------------------------
-
-    n = int(
-        input("Enter number of data points: ")
-    )
-
-
-    # ---------------------------------------------
-    # x values
-    # ---------------------------------------------
+    n = int( input("Enter number of data points: "))
 
     x_values = []
 
@@ -562,16 +535,9 @@ elif choice == 5:
 
     for i in range(n):
 
-        value = float(
-            input(f"x[{i}] = ")
-        )
+        value = float( input(f"x[{i}] = "))
 
         x_values.append(value)
-
-
-    # ---------------------------------------------
-    # y values
-    # ---------------------------------------------
 
     y_values = []
 
@@ -579,34 +545,15 @@ elif choice == 5:
 
     for i in range(n):
 
-        value = float(
-            input(f"y[{i}] = ")
-        )
+        value = float(input(f"y[{i}] = "))
 
         y_values.append(value)
 
 
-    # ---------------------------------------------
-    # Interpolation point
-    # ---------------------------------------------
+    interpolation_x = float(input("\nEnter x value to interpolate: "))
 
-    interpolation_x = float(
-        input("\nEnter x value to interpolate: ")
-    )
+    lagrange = LagrangeInterpolation( function )
 
-
-    # ---------------------------------------------
-    # Create object
-    # ---------------------------------------------
-
-    lagrange = LagrangeInterpolation(
-        function
-    )
-
-
-    # ---------------------------------------------
-    # Calculate polynomial
-    # ---------------------------------------------
 
     polynomial = lagrange.calculate(
         x_values,
@@ -618,59 +565,26 @@ elif choice == 5:
     print("           LAGRANGE POLYNOMIAL")
     print("==============================================")
 
-    print(
-        "P(x) =",
-        polynomial
-    )
+    print( "P(x) =",polynomial)
 
+    result = lagrange.evaluate( polynomial, interpolation_x)
 
-    # ---------------------------------------------
-    # Evaluate polynomial
-    # ---------------------------------------------
+    exact_value = function( interpolation_x)
 
-    result = lagrange.evaluate(
-        polynomial,
-        interpolation_x
-    )
-
-
-    # ---------------------------------------------
-    # Exact value
-    # ---------------------------------------------
-
-    exact_value = function(
-        interpolation_x
-    )
-
-    error = lagrange.absolute_error(
-        interpolation_x,
-        result
-    )
+    error = lagrange.absolute_error( interpolation_x, result )
 
     print("\n==============================================")
     print("                 RESULT")
     print("==============================================")
 
 
-    print(
-        "x value           :",
-        interpolation_x
-    )
+    print( "x value :", interpolation_x)
 
-    print(
-        "Interpolated Value:",
-        result
-    )
+    print("Interpolated Value:",result)
 
-    print(
-        "Exact Value       :",
-        exact_value
-    )
+    print("Exact Value       :",exact_value)
 
-    print(
-        "Absolute Error    :",
-        error
-    )
+    print( "Absolute Error    :",error)
 
     graph = Graph(
         None,
@@ -702,9 +616,7 @@ elif choice == 6:
 
     for i in range(n):
 
-        value = float(
-            input(f"x[{i}] = ")
-        )
+        value = float( input(f"x[{i}] = "))
 
         x_values.append(value)
 
@@ -714,9 +626,7 @@ elif choice == 6:
 
     for i in range(n):
 
-        value = float(
-            input(f"y[{i}] = ")
-        )
+        value = float( input(f"y[{i}] = ") )
 
         y_values.append(value)
 
@@ -726,10 +636,7 @@ elif choice == 6:
 
     newton = NewtonDividedDifference( function)
 
-    table = newton.divided_difference_table(
-        x_values,
-        y_values
-    )
+    table = newton.divided_difference_table( x_values, y_values)
 
 
     print("\n==============================================")
@@ -755,9 +662,7 @@ elif choice == 6:
 
     print()
 
-    print(
-        "-" * (12 + 15 * n)
-    )
+    print( "-" * (12 + 15 * n) )
 
 
     for i in range(n):
@@ -782,10 +687,7 @@ elif choice == 6:
 
         print()
 
-    polynomial = newton.calculate(
-        x_values,
-        y_values
-    )
+    polynomial = newton.calculate(x_values,y_values)
 
 
     print("\n==============================================")
@@ -793,10 +695,7 @@ elif choice == 6:
     print("==============================================")
 
 
-    print(
-        "P(x) =",
-        polynomial
-    )
+    print( "P(x) =", polynomial )
 
     result = newton.evaluate(
         x_values,
@@ -804,9 +703,7 @@ elif choice == 6:
         interpolation_x
     )
 
-    exact_value = function(
-        interpolation_x
-    )
+    exact_value = function( interpolation_x)
 
     error = newton.absolute_error(
         x_values,
