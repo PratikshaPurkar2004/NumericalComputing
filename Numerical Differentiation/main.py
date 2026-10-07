@@ -14,39 +14,15 @@ from simpsonThreeEight import SimpsonThreeEight
 from Graph import Graph
 
 
-# =================================================
-# Function
-# =================================================
-
 def function(x):
-
     return x**2
 
-
-# =================================================
-# Exact derivative
-# =================================================
-
 def exact_derivative(x):
-
     return 2*x
 
 
-# =================================================
-# Step sizes for numerical differentiation
-# =================================================
+h_values = [0.1, 0.01, 0.001, 0.0001]
 
-h_values = [
-    0.1,
-    0.01,
-    0.001,
-    0.0001
-]
-
-
-# =================================================
-# Menu
-# =================================================
 
 print("\n==============================================")
 print("             NUMERICAL METHODS")
@@ -63,58 +39,18 @@ print("7. Numerical Integration")
 print("==============================================")
 
 
-choice = int(
-    input("Enter your choice: ")
-)
-
-
-# =================================================
-# Forward Difference
-# =================================================
+choice = int(input("Enter your choice: "))
 
 if choice == 1:
 
-    # ---------------------------------------------
-    # Take x only for numerical differentiation
-    # ---------------------------------------------
+    x = float(input("Enter value of x: "))
 
-    x = float(
-        input("Enter value of x: ")
-    )
+    forward = ForwardDifference(function,exact_derivative,x )
+    backward = BackwardDifference(function,exact_derivative, x)
 
+    central = CentralDifference( function, exact_derivative, x)
 
-    # ---------------------------------------------
-    # Create objects
-    # ---------------------------------------------
-
-    forward = ForwardDifference(
-        function,
-        exact_derivative,
-        x
-    )
-
-    backward = BackwardDifference(
-        function,
-        exact_derivative,
-        x
-    )
-
-    central = CentralDifference(
-        function,
-        exact_derivative,
-        x
-    )
-
-    richardson = RichardsonExtrapolation(
-        function,
-        exact_derivative,
-        x
-    )
-
-
-    # ---------------------------------------------
-    # Exact derivative
-    # ---------------------------------------------
+    richardson = RichardsonExtrapolation( function, exact_derivative, x)
 
     exact = exact_derivative(x)
 
@@ -123,16 +59,9 @@ if choice == 1:
     print("           FORWARD DIFFERENCE")
     print("==============================================")
 
-    print(
-        "Exact Derivative :",
-        exact
-    )
+    print( "Exact Derivative :", exact)
 
-    print(
-        "x value          :",
-        x
-    )
-
+    print( "x value          :", x)
 
     print(
         "\n{:<12} {:<25} {:<20}".format(
@@ -149,10 +78,7 @@ if choice == 1:
 
         result = forward.calculate(h)
 
-        error = forward.absolute_error(
-            result
-        )
-
+        error = forward.absolute_error( result )
 
         print(
             "{:<12.4f} {:<25.10f} {:<20.10f}".format(
@@ -162,10 +88,6 @@ if choice == 1:
             )
         )
 
-
-    # ---------------------------------------------
-    # Graph
-    # ---------------------------------------------
 
     graph = Graph(
         forward,
@@ -184,27 +106,13 @@ if choice == 1:
     )
 
 
-# =================================================
-# Backward Difference
-# =================================================
-
 elif choice == 2:
 
-    # ---------------------------------------------
-    # Take x only for numerical differentiation
-    # ---------------------------------------------
 
-    x = float(
-        input("Enter value of x: ")
-    )
-
-
-    # ---------------------------------------------
-    # Create objects
-    # ---------------------------------------------
+    x = float( input("Enter value of x: ") )
 
     forward = ForwardDifference(
-        function,
+     function,
         exact_derivative,
         x
     )
