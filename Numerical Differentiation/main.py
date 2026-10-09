@@ -252,9 +252,6 @@ elif choice == 3:
     )
 
 
-    # ---------------------------------------------
-    # Exact derivative
-    # ---------------------------------------------
 
     exact = exact_derivative(x)
 
@@ -289,9 +286,7 @@ elif choice == 3:
 
         result = central.calculate(h)
 
-        error = central.absolute_error(
-            result
-        )
+        error = central.absolute_error(result)
 
 
         print(
@@ -303,10 +298,6 @@ elif choice == 3:
         )
 
 
-    # ---------------------------------------------
-    # Graph
-    # ---------------------------------------------
-
     graph = Graph(
         forward,
         backward,
@@ -317,56 +308,18 @@ elif choice == 3:
     )
 
 
-    graph.plot_error(
-        h_values,
-        exact_derivative,
-        x
-    )
+    graph.plot_error( h_values, exact_derivative, x)
 
-
-# =================================================
-# Richardson Extrapolation
-# =================================================
 
 elif choice == 4:
+    x = float(input("Enter value of x: ") )
+    forward = ForwardDifference(function, exact_derivative,  x)
 
-    # ---------------------------------------------
-    # Take x only for numerical differentiation
-    # ---------------------------------------------
+    backward = BackwardDifference( function,exact_derivative, x)
 
-    x = float(
-        input("Enter value of x: ")
-    )
+    central = CentralDifference(function,exact_derivative,x)
 
-
-    # ---------------------------------------------
-    # Create objects
-    # ---------------------------------------------
-
-    forward = ForwardDifference(
-        function,
-        exact_derivative,
-        x
-    )
-
-    backward = BackwardDifference(
-        function,
-        exact_derivative,
-        x
-    )
-
-    central = CentralDifference(
-        function,
-        exact_derivative,
-        x
-    )
-
-    richardson = RichardsonExtrapolation(
-        function,
-        exact_derivative,
-        x
-    )
-
+    richardson = RichardsonExtrapolation(function, exact_derivative, x)
     exact = exact_derivative(x)
 
 
@@ -374,15 +327,9 @@ elif choice == 4:
     print("        RICHARDSON EXTRAPOLATION")
     print("==============================================")
 
-    print(
-        "Exact Derivative :",
-        exact
-    )
+    print( "Exact Derivative :",exact)
 
-    print(
-        "x value          :",
-        x
-    )
+    print("x value          :",x)
 
 
     print(
@@ -421,11 +368,7 @@ elif choice == 4:
     )
 
 
-    graph.plot_error(
-        h_values,
-        exact_derivative,
-        x
-    )
+    graph.plot_error( h_values, exact_derivative, x)
 
 
 elif choice == 5:
@@ -463,11 +406,7 @@ elif choice == 5:
     lagrange = LagrangeInterpolation( function )
 
 
-    polynomial = lagrange.calculate(
-        x_values,
-        y_values
-    )
-
+    polynomial = lagrange.calculate( x_values, y_values)
 
     print("\n==============================================")
     print("           LAGRANGE POLYNOMIAL")
