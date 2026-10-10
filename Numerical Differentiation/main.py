@@ -208,51 +208,15 @@ elif choice == 2:
     )
 
 
-# =================================================
-# Central Difference
-# =================================================
 
 elif choice == 3:
+    x = float(input("Enter value of x: ") )
+    forward = ForwardDifference(function,exact_derivative, x)
 
-    # ---------------------------------------------
-    # Take x only for numerical differentiation
-    # ---------------------------------------------
+    backward = BackwardDifference( function,exact_derivative,x)
 
-    x = float(
-        input("Enter value of x: ")
-    )
-
-
-    # ---------------------------------------------
-    # Create objects
-    # ---------------------------------------------
-
-    forward = ForwardDifference(
-        function,
-        exact_derivative,
-        x
-    )
-
-    backward = BackwardDifference(
-        function,
-        exact_derivative,
-        x
-    )
-
-    central = CentralDifference(
-        function,
-        exact_derivative,
-        x
-    )
-
-    richardson = RichardsonExtrapolation(
-        function,
-        exact_derivative,
-        x
-    )
-
-
-
+    central = CentralDifference(function, exact_derivative, x)
+    richardson = RichardsonExtrapolation(function, exact_derivative,x)
     exact = exact_derivative(x)
 
 
