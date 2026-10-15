@@ -10,7 +10,7 @@ from NewtonDividedDifference import NewtonDividedDifference
 from TrapezoidalRule import Trapezoidal
 from simpsonOneThird import SimpsonOneThird
 from simpsonThreeEight import SimpsonThreeEight
-
+from powerMethod import PowerMethod
 from Graph import Graph
 
 
@@ -35,7 +35,7 @@ print("4. Richardson Extrapolation")
 print("5. Lagrange Interpolation")
 print("6. Newton Divided Difference")
 print("7. Numerical Integration")
-
+print("8. Power Method")
 print("==============================================")
 
 
@@ -760,6 +760,75 @@ elif choice == 7:
         simpson38_errors
     )
 
-else:
+    
+elif choice == 8:
 
-    print("\nInvalid choice!")
+    print("\n==============================================")
+    print("                 POWER METHOD")
+    print("==============================================")
+
+    n = int(input("Enter order of square matrix: "))
+
+    matrix = []
+
+    print("\nEnter matrix row by row:")
+
+    for i in range(n):
+        row = list(map(
+            float,
+            input(f"Enter row {i + 1}: ").split()
+        ))
+
+        if len(row) != n:
+            print(f"Please enter exactly {n} values.")
+            break
+
+        matrix.append(row)
+
+    if len(matrix) == n:
+
+        initial_vector = list(map(
+            float,
+            input("\nEnter initial vector: ").split()
+        ))
+
+        if len(initial_vector) != n:
+            print(f"Please enter exactly {n} values.")
+
+        else:
+            tolerance = float(
+                input("Enter tolerance (e.g. 0.000001): ")
+            )
+
+            max_iterations = int(
+                input("Enter maximum iterations: ")
+            )
+
+            power = PowerMethod(matrix)
+
+            try:
+                eigenvalue, eigenvector, iterations = power.solve(
+                    initial_vector,
+                    tolerance,
+                    max_iterations
+                )
+
+                print("\n==============================================")
+                print("                    RESULT")
+                print("==============================================")
+
+                print(f"Dominant Eigenvalue: {eigenvalue:.6f}")
+
+                print("\nDominant Eigenvector:")
+
+                for value in eigenvector:
+                    print(f"{value:.6f}")
+
+                print(f"\nIterations: {iterations}")
+
+            except ValueError as error:
+                print("Error:", error)
+
+    else:
+        print("\nInvalid choice!")
+
