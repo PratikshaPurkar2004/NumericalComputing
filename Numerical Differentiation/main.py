@@ -47,9 +47,7 @@ if choice == 1:
 
     forward = ForwardDifference(function,exact_derivative,x )
     backward = BackwardDifference(function,exact_derivative, x)
-
     central = CentralDifference( function, exact_derivative, x)
-
     richardson = RichardsonExtrapolation( function, exact_derivative, x)
 
     exact = exact_derivative(x)
@@ -129,16 +127,7 @@ elif choice == 2:
         x
     )
 
-    richardson = RichardsonExtrapolation(
-        function,
-        exact_derivative,
-        x
-    )
-
-
-    # ---------------------------------------------
-    # Exact derivative
-    # ---------------------------------------------
+    richardson = RichardsonExtrapolation( function, exact_derivative,x)
 
     exact = exact_derivative(x)
 
@@ -152,10 +141,7 @@ elif choice == 2:
         exact
     )
 
-    print(
-        "x value          :",
-        x
-    )
+    print( "x value          :", x)
 
 
     print(
@@ -187,9 +173,6 @@ elif choice == 2:
         )
 
 
-    # ---------------------------------------------
-    # Graph
-    # ---------------------------------------------
 
     graph = Graph(
         forward,
