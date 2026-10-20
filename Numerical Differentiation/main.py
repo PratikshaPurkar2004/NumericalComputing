@@ -109,23 +109,11 @@ elif choice == 2:
 
     x = float( input("Enter value of x: ") )
 
-    forward = ForwardDifference(
-     function,
-        exact_derivative,
-        x
-    )
+    forward = ForwardDifference(function,exact_derivative,x)
 
-    backward = BackwardDifference(
-        function,
-        exact_derivative,
-        x
-    )
+    backward = BackwardDifference( function,exact_derivative,x)
 
-    central = CentralDifference(
-        function,
-        exact_derivative,
-        x
-    )
+    central = CentralDifference(function,exact_derivative,x)
 
     richardson = RichardsonExtrapolation( function, exact_derivative,x)
 
@@ -158,10 +146,7 @@ elif choice == 2:
     for h in h_values:
 
         result = backward.calculate(h)
-
-        error = backward.absolute_error(
-            result
-        )
+        error = backward.absolute_error(result)
 
 
         print(
@@ -182,15 +167,7 @@ elif choice == 2:
         None,
         None
     )
-
-
-    graph.plot_error(
-        h_values,
-        exact_derivative,
-        x
-    )
-
-
+    graph.plot_error( h_values, exact_derivative, x )
 
 elif choice == 3:
     x = float(input("Enter value of x: ") )
@@ -207,15 +184,9 @@ elif choice == 3:
     print("           CENTRAL DIFFERENCE")
     print("==============================================")
 
-    print(
-        "Exact Derivative :",
-        exact
-    )
+    print("Exact Derivative :", exact)
 
-    print(
-        "x value          :",
-        x
-    )
+    print("x value          :", x)
 
 
     print(
